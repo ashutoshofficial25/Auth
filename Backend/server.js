@@ -4,40 +4,6 @@ const bodyParser = require("body-parser");
 const dbConfig = require("./config/db.config");
 const { default: mongoose } = require("mongoose");
 
-const swaggerJSDoc = require("swagger-jsdoc");
-const swaggerUi = require("swagger-ui-express");
-
-const swaggerDefinition = {
-  openapi: "3.0.0",
-  info: {
-    title: "Express API for Json Placeholder",
-    version: "1.0.0",
-    description:
-      "This is a REST API application made with Express. It retrieves data from JSONPlaceholder.",
-    license: {
-      name: "Licensed Under MIT",
-      url: "https://spdx.org/licenses/MIT.html",
-    },
-    contact: {
-      name: "JSONPlaceholder",
-      url: "https://jsonplaceholder.typicode.com",
-    },
-  },
-  servers: [
-    {
-      url: "http://localhost:5000/",
-      description: "Local server",
-    },
-  ],
-};
-
-const options = {
-  swaggerDefinition,
-
-  apis: ["./routes/*.js"],
-};
-
-const swaggerSpec = swaggerJSDoc(options);
 const userRouter = require("./routes/userRoute");
 
 mongoose.Promise = global.Promise;
@@ -55,8 +21,6 @@ mongoose
   });
 
 const app = express();
-
-app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 const port = 5000;
 

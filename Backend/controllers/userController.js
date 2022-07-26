@@ -18,8 +18,11 @@ exports.create = async (req, res) => {
 };
 
 exports.getall = async (req, res) => {
+  const users = await UserModal.find();
+
   res.status(200).json({
     status: "success",
-    message: "it is not defined yet",
+    length: users.length,
+    data: users,
   });
 };
