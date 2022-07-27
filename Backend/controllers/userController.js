@@ -1,11 +1,11 @@
-const UserModal = require("./../models/test");
+const user = require("./../models/userSchema");
 //Creating a new user
 exports.create = async (req, res) => {
   if (!req.body.email && !req.body.name && !req.body.phone) {
     res.status(400).send({ message: "field should not be empty" });
   }
 
-  const user = await UserModal.create({
+  const user = await user.create({
     email: req.body.email,
     name: req.body.name,
     phone: req.body.phone,
@@ -18,7 +18,7 @@ exports.create = async (req, res) => {
 };
 
 exports.getall = async (req, res) => {
-  const users = await UserModal.find();
+  const users = await user.find();
 
   res.status(200).json({
     status: "success",
